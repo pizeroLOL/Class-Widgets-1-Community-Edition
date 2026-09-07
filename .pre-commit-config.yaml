@@ -40,7 +40,7 @@ repos:
         args: [--py38-plus]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.13
+    rev: v0.16.6
     hooks:
       - id: ruff-format
       - id: ruff-check
@@ -65,7 +65,7 @@ repos:
           - "@prettier/plugin-xml"
 
   - repo: https://github.com/pappasam/toml-sort
-    rev: v0.24.3
+    rev: v0.24.4
     hooks:
       - id: toml-sort-fix
         args: ["--all", "--in-place"]

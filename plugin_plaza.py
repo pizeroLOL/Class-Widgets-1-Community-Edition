@@ -315,7 +315,7 @@ class PluginDetailPage(MessageBoxBase):  # 插件详情页面
         self.title = title
         self.parent = parent
         self.url = url
-        self.p_name = url.split('/')[-1]  # repo
+        self.p_name = url.rsplit('/', maxsplit=1)[-1]  # repo
         author_url = '/'.join(url.rsplit('/', 2)[:-1])
         self.init_ui()
         self.download_readme()
@@ -446,7 +446,7 @@ class PluginCard_Horizontal(CardWidget):  # 插件卡片（横向）
         self.tag = tag
         self.branch = data.get("branch")
         self.url = url
-        self.p_name = url.split('/')[-1]  # repo
+        self.p_name = url.rsplit('/', maxsplit=1)[-1]  # repo
         self.data = data
         author_url = '/'.join(self.url.rsplit('/', 2)[:-1])
 
@@ -717,7 +717,7 @@ class PluginPlaza(MSFluentWindow):
         self.banner_view.clicked.connect(self.open_banner_link)
 
         self.auto_play_timer = QTimer(self)  # 自动轮播
-        self.auto_play_timer.timeout.connect(lambda: self.switch_banners())
+        self.auto_play_timer.timeout.connect(self.switch_banners)
         self.auto_play_timer.setInterval(2500)
 
         # 翻页
