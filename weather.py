@@ -128,7 +128,7 @@ def cache_result(expire_seconds: int = 300):
             cache[cache_key] = (result, current_time)
             return result
 
-        wrapper.clear_cache = lambda: cache.clear()
+        wrapper.clear_cache = cache.clear
         return wrapper
 
     return decorator

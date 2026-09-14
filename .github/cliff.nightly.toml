@@ -33,12 +33,12 @@ trim = true
 
 [git]
 commit_parsers = [
-  {group = "⏪ 回滚", message = "^revert"},
-  {group = "⚡ 性能优化", message = "^perf"},
-  {group = "✨ 新功能", message = "^feat"},
-  {group = "🐛 Bug 修复", message = "^fix"},
-  {group = "💄 样式调整", message = "^style"},
-  {group = "📚 文档更新", message = "^docs"}
+  { group = "⏪ 回滚", message = "^revert" },
+  { group = "⚡ 性能优化", message = "^perf" },
+  { group = "✨ 新功能", message = "^feat" },
+  { group = "🐛 Bug 修复", message = "^fix" },
+  { group = "💄 样式调整", message = "^style" },
+  { group = "📚 文档更新", message = "^docs" }
 ]
 conventional_commits = true
 filter_commits = true
