@@ -1834,8 +1834,8 @@ class FloatingWidget(QWidget):  # 浮窗
         if utils.focus_manager:
             QTimer.singleShot(
                 500,
-                lambda: (
-                    utils.focus_manager.remove_ignore.emit(ctypes.c_void_p(int(self.winId())).value)
+                lambda: utils.focus_manager.remove_ignore.emit(
+                    ctypes.c_void_p(int(self.winId())).value
                 ),
             )
 
@@ -2376,8 +2376,8 @@ class DesktopWidget(QWidget):  # 主要小组件
         if utils.focus_manager:
             QTimer.singleShot(
                 500,
-                lambda: (
-                    utils.focus_manager.remove_ignore.emit(ctypes.c_void_p(int(self.winId())).value)
+                lambda: utils.focus_manager.remove_ignore.emit(
+                    ctypes.c_void_p(int(self.winId())).value
                 ),
             )
 
@@ -2418,12 +2418,12 @@ class DesktopWidget(QWidget):  # 主要小组件
                 Action(
                     fIcon.HIDE,
                     self.tr('完全隐藏/显示小组件'),
-                    triggered=lambda: self.hide_show_widgets(),
+                    triggered=self.hide_show_widgets,
                 ),
                 Action(
                     fIcon.BACK_TO_WINDOW,
                     self.tr('最小化为浮窗'),
-                    triggered=lambda: self.minimize_to_floating(),
+                    triggered=self.minimize_to_floating,
                 ),
             ]
         )
@@ -3574,7 +3574,7 @@ class DesktopWidget(QWidget):  # 主要小组件
         else:
             '''其他系统'''
             self.animation.setEndValue(QRect(self.x(), 0, self.width(), self.height()))
-            self.animation.finished.connect(lambda: self.hide())
+            self.animation.finished.connect(self.hide)
 
         self.animation.setEasingCurve(QEasingCurve.Type.OutExpo)  # 设置动画效果
         self.animation.start()
