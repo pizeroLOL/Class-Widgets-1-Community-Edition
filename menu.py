@@ -586,8 +586,8 @@ class selectCity(MessageBoxBase):  # 选择城市
             self.error_text = QLabel()
             self.error_text.setStyleSheet("color: red;")
             self.error_text.hide()
-            self.longitude_edit.textChanged.connect(lambda: self._check_coordinates())
-            self.latitude_edit.textChanged.connect(lambda: self._check_coordinates())
+            self.longitude_edit.textChanged.connect(self._check_coordinates)
+            self.latitude_edit.textChanged.connect(self._check_coordinates)
 
             self.viewLayout.addWidget(title_label)
             self.viewLayout.addWidget(subtitle_label)
@@ -2675,15 +2675,19 @@ class SettingsMenu(FluentWindow):
             engine_filter=engine_key, language_filter=language_filter
         )
         self.tts_voice_loader_thread.voicesLoaded.connect(
-            lambda voices: self.available_voices_cnt(voices)
-            or self.switch_enable_TTS.setEnabled(True)
-            or self._enable_language_selector()
-            or self._enable_preview_button()
+            lambda voices: (
+                self.available_voices_cnt(voices)
+                or self.switch_enable_TTS.setEnabled(True)
+                or self._enable_language_selector()
+                or self._enable_preview_button()
+            )
         )
         self.tts_voice_loader_thread.errorOccurred.connect(
-            lambda error: self.handle_tts_load_error(error)
-            or self.switch_enable_TTS.setEnabled(True)
-            or self._enable_language_selector()
+            lambda error: (
+                self.handle_tts_load_error(error)
+                or self.switch_enable_TTS.setEnabled(True)
+                or self._enable_language_selector()
+            )
         )
         self.tts_voice_loader_thread.start()
 
@@ -4862,7 +4866,7 @@ class SettingsMenu(FluentWindow):
     def cf_import_schedule_cses(self, file_path: str):  # 导入课程表（CSES）
         # TODO: 切换到 pathlib.Path
         if file_path:
-            file_name = file_path.split("/")[-1]
+            file_name = file_path.rsplit("/", maxsplit=1)[-1]
             save_path = SCHEDULE_DIR / file_name.replace('.yaml', '.json')
 
             if save_path.exists():
