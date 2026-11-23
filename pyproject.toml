@@ -140,4 +140,4 @@ select = [
 inline_arrays = false
 
 [tool.uv.sources]
-pycses = {git = "https://github.com/SmartTeachCN/pycses.git"}
+pycses = { git = "https://github.com/SmartTeachCN/pycses.git" }
